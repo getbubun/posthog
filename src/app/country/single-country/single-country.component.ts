@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { AppService } from "../../app.service";
 import { NgxSpinnerService } from "ngx-spinner";
+import posthog from 'posthog-js';
 
 @Component({
   selector: 'app-single-country',
@@ -45,7 +46,11 @@ export class SingleCountryComponent implements OnInit {
           }
         );
     });
+
+    posthog.capture('[Country-visited]', {name: "countryDetails.name"});
   }
+
+  
 
   public goBack = (): any => {
     this.location.back();
